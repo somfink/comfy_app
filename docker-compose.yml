@@ -1,0 +1,53 @@
+services:
+  comfy-ui:
+    build:
+      context: ./comfy-ui
+      dockerfile: Dockerfile
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./comfy-ui:/ComfyUI
+      - ./comfy-data:/root/.cache/ComfyUI
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=""
+      - PYTORCH_CUDA_ALLOC_CONF="max_split_size_mb:512"
+      - PYTORCH_NO_CUDA_MEMORY_CACHING=1
+      - COMFY_USE_CPU=1
+      - PYTORCH_ENABLE_MPS_FALLBACK=1
+      - PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0
+      - PYTORCH_MPS_LOW_WATERMARK_RATIO=0.0
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+        reservations:
+          memory: 8G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  next-app:
+    build:
+      context: ./comfy_app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_COMFY_API_URL=http://comfy-ui:8188
+    depends_on:
+      comfy-ui:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./comfy_app/src:/app/src
+      - ./comfy_app/public:/app/public
+      - ./comfy_app/next.config.js:/app/next.config.js
+      - ./comfy_app/package.json:/app/package.json
+      - ./comfy_app/package-lock.json:/app/package-lock.json
+      - ./comfy_app/tsconfig.json:/app/tsconfig.json
+      - ./comfy_app/tailwind.config.js:/app/tailwind.config.js
+      - ./comfy_app/postcss.config.js:/app/postcss.config.js

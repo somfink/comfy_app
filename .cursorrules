@@ -1,0 +1,247 @@
+You are an Expert in Tailwind, TypeScript, Next.js 14 App Router, React, Vite, Three.js with react, Shadcn UI, Headless UI, Tanstack/react-query v5, react-hook-form and Tailwind Aria.
+
+## Communication
+- All communication should be in Polish
+- Code comments and documentation should be in English
+- Error messages and user-facing content should be in Polish
+
+## Analysis Process
+
+Before responding to any request, follow these steps:
+
+1. Request Analysis
+
+- Determine task type (code creation, debugging, architecture, etc.)
+- Identify languages and frameworks involved
+- Note explicit and implicit requirements
+- Define core problem and desired outcome
+- Consider project context and constraints
+
+2. Solution Planning
+
+- Break down the solution into logical steps
+- Consider modularity and reusability
+- Identify necessary files and dependencies
+- Evaluate alternative approaches
+- Plan for testing and validation
+
+3. Implementation Strategy
+
+- Choose appropriate design patterns
+- Consider performance implications
+- Plan for error handling and edge cases
+- Ensure accessibility compliance
+- Verify best practices alignment
+
+## Project Structure
+
+/src
+├── /app
+│   ├── /(auth)
+│   │   ├── /api
+│   │   │   ├── /auth
+│   │   │   └── /[...nextauth]
+│   │   ├── /login
+│   │   └── /reset-password
+│   ├── /(dashboard)
+│   │   ├── /api
+│   │   │   ├── /comfy
+│   │   │   │   ├── /queue
+│   │   │   │   ├── /history
+│   │   │   │   └── /workflow
+│   │   │   └── /user
+│   │   ├── /dashboard
+│   │   │   └── /page.tsx
+│   │   ├── /my-assets
+│   │   │   └── /page.tsx
+│   │   └── /settings
+│   │       └── /page.tsx
+│   ├── /api
+│   │   ├── /comfy
+│   │   │   ├── /route.ts
+│   │   │   └── /types.ts
+│   │   └── /health
+│   │       └── /route.ts
+│   ├── /error.tsx
+│   ├── /layout.tsx
+│   ├── /globals.css
+│   └── /not-found.tsx
+├── /components
+│   ├── /ui
+│   │   ├── /button
+│   │   ├── /card
+│   │   ├── /dialog
+│   │   └── /form
+│   ├── /shared
+│   │   ├── /comfy
+│   │   │   ├── /ComfyWorkflowViewer.tsx
+│   │   │   ├── /ComfyQueueManager.tsx
+│   │   │   └── /ComfyNodeEditor.tsx
+│   │   ├── /layout
+│   │   │   ├── /Navbar.tsx
+│   │   │   └── /Footer.tsx
+│   │   └── /common
+│   │       ├── /LoadingSpinner.tsx
+│   │       └── /ErrorBoundary.tsx
+│   └── /features
+│       ├── /auth
+│       └── /dashboard
+├── /lib
+│   ├── /comfy
+│   │   ├── /api.ts
+│   │   ├── /types.ts
+│   │   └── /utils.ts
+│   ├── /auth
+│   └── /utils
+├── /services
+│   ├── /comfy
+│   │   ├── /api.ts
+│   │   ├── /queue.ts
+│   │   └── /workflow.ts
+│   └── /user
+├── /hooks
+│   ├── /comfy
+│   │   ├── /useComfyQueue.ts
+│   │   └── /useComfyWorkflow.ts
+│   └── /common
+├── /types
+│   ├── /comfy.ts
+│   ├── /api.ts
+│   └── /common.ts
+├── /config
+│   ├── /comfy.ts
+│   └── /env.ts
+├── /styles
+│   └── /theme
+│       ├── /colors.ts
+│       └── /variables.ts
+├── /middleware.ts
+├── /providers.tsx
+└── /constants.ts
+
+## Docker Configuration
+- Create a multi-stage Dockerfile for optimal build size
+- Include Comfy UI service configuration
+- Use environment variables for configuration
+- Implement health checks for services
+- Use Docker Compose for local development
+
+## Styling
+
+- style app in way to easly change colors in futures - try to use variables insted of hard coded color values
+- use phosphor icons for all icons
+- use shadcn ui for components
+- use tailwind css for styling
+- use tailwind aria for accessibility
+
+## Key Principles
+
+- Write concise, technical responses with accurate TypeScript examples.
+- Use functional, declarative programming. Avoid classes.
+- Prefer iteration and modularization over duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading).
+- Use lowercase with dashes for page directories (e.g., app/auth-wizard).
+- Use CamelCase with dashes for page directories (e.g., pageComponents/ImageTo3d).
+- Favor default exports for components.
+- Use the Receive an Object, Return an Object (RORO) pattern.
+
+## JavaScript/TypeScript
+
+- Use arrow functions for components and dunctions. Omit semicolons.
+- Use TypeScript for all code. Prefer types over interfaces. Genrally use enums, but when I ask use maps.
+- File structure: Exported component, subcomponents, helpers, static content, types.
+- Avoid unnecessary curly braces in conditional statements.
+- For single-line statements in conditionals, omit curly braces.
+- Try to not use any and unknown
+- Do not import types as React.Node, use import type { ReactNode } from 'react'; instead
+
+```tsx
+import type { ReactNode } from 'react';
+```
+
+- Use concise, multiline-line syntax for conditional statements (e.g.:
+
+```ts
+if (condition) {
+ doSomething();
+}
+```
+).
+
+- add line space before return statement eg:
+```ts
+if (condition) {
+ doSomething();
+
+ return;
+}
+```
+
+## Error Handling and Validation
+
+- Prioritize error handling and edge cases:
+- Handle errors and edge cases at the beginning of functions.
+- Use early returns for error conditions to avoid deeply nested if statements.
+- Place the happy path last in the function for improved readability.
+- Avoid unnecessary else statements; use if-return pattern instead.
+- Use guard clauses to handle preconditions and invalid states early.
+- Implement proper error logging and user-friendly error messages.
+- Consider using custom error types or error factories for consistent error handling.
+
+## React/Next.js
+
+- Use functional components and TypeScript interfaces.
+- Use declarative JSX.
+- Use const, not function, for components.
+- Use Shadcn UI, Radix, Headless UI and Tailwind Aria for components and styling.
+- Implement responsive design with Tailwind CSS.
+- Place static content and interfaces at file end.
+- Use content variables for static content outside render functions.
+- Minimize 'use client', 'useEffect', and 'setState'. Favor RSC.
+- Use Zod for form validation.
+- Wrap client components in Suspense with fallback.
+- Use dynamic loading for non-critical components.
+- Optimize images: WebP format, size data, lazy loading.
+- Model expected errors as return values: Avoid using try/catch for expected errors in Server Actions. Use useActionState to manage these errors and return them to the client.
+- Use error boundaries for unexpected errors: Implement error boundaries using error.tsx and global-error.tsx files to handle unexpected errors and provide a fallback UI.
+- Use useActionState with react-hook-form for form validation.
+- Code in services/ dir always throw user-friendly errors that tanStackQuery can catch and show to the user.
+- Always throw user-friendly errors that tanStackQuery can catch and show to the user if it's client component.
+- Use next-safe-action for all server actions:
+- Implement type-safe server actions with proper validation.
+- Utilize the action function from next-safe-action for creating actions.
+- Define input schemas using Zod for robust type checking and validation.
+- Handle errors gracefully and return appropriate responses.
+- Use import type { ActionResponse } from '@/types/actions'
+- Ensure all server actions return the ActionResponse type
+- Implement consistent error handling and success responses using ActionResponse
+- use react-hook-form for form handling and for validations use zod schemas
+
+## Comfy UI Integration
+- Create a dedicated service for Comfy UI communication
+- Implement proper error handling for Comfy UI API calls
+- Use environment variables for Comfy UI configuration
+- Implement proper type definitions for Comfy UI responses
+- Use proper error handling for Comfy UI specific errors
+- Implement proper logging for Comfy UI operations
+- Use proper caching strategies for Comfy UI responses
+- Implement proper retry mechanisms for failed Comfy UI calls
+
+## Key Conventions
+
+1. Rely on Next.js App Router for state changes.
+2. Prioritize Web Vitals (LCP, CLS, FID).
+3. Minimize 'use client' usage:
+4. Split code on smaller code fragments - do helpers, hooks, and components as a part of view to keep code quality on high level
+5. Use shadcn ui for components
+6. Use tailwind css for styling
+7. Talk only with Polish language but search everything in English
+
+- Prefer server components and Next.js SSR features.
+- Use 'use client' only for Web API access in small components.
+- Avoid using 'use client' for data fetching or state management.
+ Refer to Next.js documentation for Data Fetching, Rendering, and Routing best practices.
+- https://nextjs.org/docs
+
+4. Use 'nuqs' for URL search parameter state management.
+5. Optimize Web Vitals (LCP, CLS, FID).
